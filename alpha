@@ -1,0 +1,64 @@
+  private void Create_Click(object sender, EventArgs e)
+        {
+            //this is a method to create formulation questions
+
+            bool iszero = false;
+            //declaring + variables
+            int Lithium = 1;
+            int Sodium = 1;
+            int Beryllium = 2;
+            int Magnesium = 2;
+            int[] positive = new int[4] { Lithium, Sodium, Beryllium, Magnesium };
+            int posmult = 1;
+            string[] posnames = new string[4] { "Lithium", "Sodium", "Beryllium", "Magnesium" };
+
+            string[, , , , , , , , ,] intarray = new string[1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+            //declaring - variables
+            int Fluorine = -1;
+            int Chlorine = -1;
+            int Oxygen = -2;
+            int Sulfur = -2;
+            int[] negative = new int[4] { Fluorine, Chlorine, Oxygen, Sulfur };
+            int negmult = 1;
+            string[] negnames = new string[4] { "Fluorine", "Chlorine", "Oxygen", "Sulfur" };
+
+            //calculating randoms for element determination
+            Random posran1 = new Random();
+            int posran = posran1.Next(0, 3);
+
+            Random negran1 = new Random();
+            int negran = negran1.Next(0, 3);
+
+            //formulating question
+            while (iszero)
+            {
+                Thread.Sleep(100);
+                if (positive[posran] * posmult + negative[negran] * negmult == 0)
+                {
+                    iszero = true;
+                }
+                else if (positive[posran] * posmult + negative[negran] * negmult != 0)
+                {
+                    if (negative[negran] * negmult > 50)
+                    {
+                        posmult++;
+                        negmult = 0;
+                    }
+                    else
+                    {
+                        negmult++;
+                    }
+                }
+            }
+
+            
+                string posSMult = posmult.ToString();
+                string negSMult = negmult.ToString();
+                string result = posnames[posran] + posSMult + negnames[negran] + negSMult;
+                Graphics output = this.CreateGraphics();
+                SolidBrush resBrush = new SolidBrush(Color.Black);
+                Font resfont = new Font("Arial", 16, FontStyle.Regular);
+                output.DrawString("result", resfont, resBrush, 40, 50);
+                
+            }
